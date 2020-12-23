@@ -1,0 +1,6 @@
+- name: check zk env
+  shell: grep -wq "ZOOKEEPER_HOME" /root/.bashrc && echo 1 ||echo 0
+  register: zk_result
+- when: zk_result == 0
+  name: set zk env
+  shell: echo "export ZOOKEEPER_HOME=/opt/zookeeper" >> /root/.bashrc && source /root/.bashrc && echo "export PATH=$ZOOKEEPER_HOME/bin:$PATH" >> /root/.bashrc && source /root/.bashrc 

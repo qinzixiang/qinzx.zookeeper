@@ -1,0 +1,22 @@
+---
+- name: check zk if exists
+  stat:
+    path: /opt/zookeeper
+  register: zk_archive
+- when: not zk_archive.stat.exists
+  block:
+    - name: unarchive zk archive
+      unarchive:
+        src: '{{ zk_archive }}'
+        dest: /opt
+    - name: add zk link
+      file:
+        state: link
+        src: '/opt/{{ zk_name }}'
+        dest: /opt/zookeeper
+    - name: config zk
+      copy:
+        src: zoo.cfg
+        dest: /opt/zookeeper/conf
+    - name: make dir and set myid
+      shell: mkdir $ZOOKEEPER_HOME/data ; echo $HOSTNAME | tr -cd "[0-9]" > $ZOOKEEPER_HOME/data/myid

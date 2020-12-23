@@ -1,0 +1,5 @@
+---
+# tasks file for qinzx.zookeeper
+- include: install.yml
+- include: set-env.yml
+- include: service.yml

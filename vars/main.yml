@@ -1,0 +1,4 @@
+---
+# vars file for qinzx.zookeeper
+zk_name: apache-zookeeper-3.6.1-bin
+zk_archive: apache-zookeeper-3.6.1-bin.tar.gz
