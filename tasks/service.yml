@@ -1,3 +1,7 @@
 ---
-- name: start zk
+- name: check zk env
+  shell: jps -l | grep -wq "zookeeper" && echo 1 || echo 0
+  register: zk_status
+- when: zk_status == 0
+  name: start zk
   shell: zkServer.sh start
