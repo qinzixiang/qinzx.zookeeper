@@ -18,5 +18,9 @@
       copy:
         src: zoo.cfg
         dest: /opt/zookeeper/conf
+    - name: make a directory for store data
+      file:
+        state: directory
+        path: $ZOOKEEPER_HOME/data
     - name: make dir and set myid
-      shell: mkdir $ZOOKEEPER_HOME/data ; echo $HOSTNAME | tr -cd "[0-9]" > $ZOOKEEPER_HOME/data/myid
+      shell: echo $HOSTNAME | tr -cd "[0-9]" > $ZOOKEEPER_HOME/data/myid
